@@ -1,0 +1,19 @@
+# CONTINUATION PROMPT — CAR PROMO CALLER (paste this, then attach the project files)
+
+I am continuing my Android app "Car Promo Caller" (Python/Kivy + native Android Java/Kotlin bridge for telephony/SMS), a sideline for promoting brand-new Toyota and BYD vehicles in the Philippines. Device: Huawei Y7a, Android 10. Final product: an installable APK that works on the phone without a PC. Explain everything in beginner-friendly language.
+
+RULES: Review the attached files first and continue from them; do not start over; preserve working functions; do not claim to remember files I have not attached. Do not claim anything works on my Huawei Y7a unless I have reported a test result. Be honest about remote-ringing detection, SIM routing, Android permissions, carrier behavior, and SMS delivery (sent != delivered). No spam-filter evasion, caller-ID spoofing, SIM rotation, or messaging opted-out/non-consenting contacts. Provide complete files, not snippets. End every session with a PROJECT STATUS section and a new continuation prompt.
+
+SPEC SUMMARY (full detail in the original master prompt): contact import (CSV/XLSX), consent/opt-out suppression list, campaign dashboard (start/pause/resume/stop, saved progress, no duplicate SMS, delays, limits, test mode), SIM selection (separate call SIM and SMS SIM, readiness checks, never silently switch SIMs, saved prefs, tested on the Y7a), outgoing calls via the phone SIM with call-state monitoring and a configurable call limit (SMS only after a reliably confirmed outcome; skip on failure/busy/unknown; never treat local RINGING as remote ringing), personalized SMS templates ({name}, {vehicle}, {promo}) with opt-out wording, reports/logs/export, local-only data, transparent permissions, Philippine privacy/direct-marketing compliance, confirmation screen before any campaign.
+
+REQUIRED EXCEL/CSV FORMAT (keep in every continuation prompt): Column A = recipient full name, Column B = mobile number. Column A replaces {name} in the SMS template; Column B is the call/SMS destination. Support an optional header row with a user setting (never skip the first contact by accident). Keep Philippine numbers as text (leading zeros / country codes preserved, no scientific notation). Validate blank names/numbers, invalid numbers, duplicates; show invalid rows; show a preview mapping Column A -> Name, Column B -> Mobile Number. Never reorder/mismatch names and numbers during import, sorting, filtering, pausing, resuming, or exporting. Support CSV with the same two columns. Consent and opt-out are stored separately from the imported data; only eligible recipients are contacted.
+Example: "Hi {name}! We have exciting Toyota and BYD promotions available. Reply to inquire or request a quotation." with Juan Dela Cruz / 09171234567 -> "Hi Juan Dela Cruz! We have exciting Toyota and BYD promotions available. Reply to inquire or request a quotation."
+
+STAGES: 1 skeleton/UI/DB/import; 2 templates, validation, opt-out; 3 permissions + SIM detection/selection; 4 call controls + call-state reporting; 5 conditional SMS, logs, resume protection; 6 small consenting-contact test; 7 build/install/troubleshoot on the Y7a.
+
+CURRENT PROGRESS (update me honestly):
+- Stage 1 code written: app/phone_utils.py, app/importer.py, app/database.py, main.py (Kivy UI: Home, Import, Contacts), buildozer.spec, tests/test_import.py.
+- Verified on a PC-side test run: phone normalization, header handling, XLSX/CSV reading, duplicate detection, consent/suppression eligibility view (8 unit tests pass).
+- NOT yet tested: the Kivy UI, APK build, installation or file picking on the Huawei Y7a. My test results will follow.
+- Not started: Stages 2-7.
+NEXT ACTION: Help me run the unit tests, build the APK, and report Stage 1 results; fix any bugs; then begin Stage 2 (template editor with {name}/{vehicle}/{promo} preview, consent-marking screen, opt-out handling).
