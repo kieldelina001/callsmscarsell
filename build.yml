@@ -1,6 +1,5 @@
 name: Build Android APK
 
-# Runs when you upload/change files, and also when you press "Run workflow".
 on:
   push:
     branches: [main, master]
@@ -43,7 +42,7 @@ jobs:
           pip install openpyxl
           python -m unittest discover -s tests -v
 
-      - name: Remember downloads between builds (makes later builds faster)
+      - name: Remember downloads between builds
         uses: actions/cache@v4
         with:
           path: |
